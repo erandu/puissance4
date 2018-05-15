@@ -57,6 +57,25 @@ socket.on('grille', function (data) {
   });
 
 
+  socket.on('victoire',function (data) {
+    console.log("victoire")
+    if(data==id)
+    {
+      $("#victoire").html("Gagné !"); 
+      $("#victoire").css("background-color","green");
+      $("#victoire").css("color","white");
+    }
+    else
+    {
+      $("#victoire").html("Perdu !"); 
+      $("#victoire").css("background-color","red");
+      $("#victoire").css("color","white");
+    }
+    
+
+  });
+
+
   
 
 

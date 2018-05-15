@@ -69,6 +69,9 @@ function init() {
       startY += cellHeight + margin;
   }
   stage.update();
+  $("#victoire").html(""); 
+  $("#victoire").css("background-color","white");
+  $("#victoire").css("color","white");
 
 
 }
@@ -129,6 +132,10 @@ function disconnect() {
   $('#info_connexion').html("Vous êtes déconnecté");
   $('#joueur').html("");
   $("#joueur_courant").html("");
+
+  $("#victoire").html(""); 
+  $("#victoire").css("background-color","white");
+  $("#victoire").css("color","white");
 }
 
 
