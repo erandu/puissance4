@@ -1,0 +1,49 @@
+<html>
+  <head> 
+    <title>
+      Puissance 4 des familles
+    </title>
+    <script
+    src="http://code.jquery.com/jquery-3.3.1.min.js"
+    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous">
+    </script>
+
+    <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.0/socket.io.js"></script>
+    </script>
+
+        <script
+    src="https://code.createjs.com/1.0.0/easeljs.min.js"></script>
+    </script>
+
+
+    <script
+    src="./socket.js">
+    </script>
+    
+    <script
+    src="./puissance4.js">
+    </script>
+
+   
+
+    <link rel="stylesheet" href="./style.css" >
+                     
+  </head>
+
+  <body onload="init();">
+    <canvas id="demoCanvas" width="800" height="800"></canvas>
+    <br/>
+    
+  <div id="info_connexion" ></div> 
+  <div id="joueur"></div>
+  <div id="joueur_courant"></div> 
+  
+
+  <br/>
+  <button type="button" onclick="connect()" id="co" >Se connecter</button><br/>
+  <button type="button"  onclick="disconnect()" id="deco">Se déconnecter</button>
+ </body>
+
+</html>
