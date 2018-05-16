@@ -35,13 +35,13 @@ io.on('connection', function (socket) {
         if(data.id==joueur_courant && game_started==true && myGrid.victoire==false)
             {
                 myGrid.play(data.id,data.pos_x);
-                myGrid.check_victoire(data.id, data.pos_x);
+                //myGrid.check_victoire(data.id, data.pos_x);
                 myGrid.show();
                 if(myGrid.victoire==true)
                 {
                     console.log("victoire");
                     io.emit('victoire', joueur_courant);
-                    //myGrid.reset_gride();
+                   //myGrid.reset_gride();
 
                 }
                     

@@ -29,6 +29,7 @@ class Grid {
 		for (let i = this.nbrOfRow - 1; i >= 0; i--){
 			if (this.grid[i][col] === 0) {
 				this.grid[i][col] = userId;
+				this.check_victoire(userId, col, i)
 				return 0;
 			}
 		}
@@ -44,18 +45,13 @@ class Grid {
 		;
 	}
 
-	check_victoire(userId, col){
-		let i=0;
+	check_victoire(userId, col, i){
 		
-		
-		for ( i = this.nbrOfRow - 1; i >= 0; i--){
-			if (this.grid[i][col] != 0) { //On detecte le coup joué
 				this.compteur_droite_gauche(userId, col, i);
 				this.compteur_haut_bas(userId, col, i);
-			}
-		}
-		
-		
+				this.compteur_diagonale_haut_gauche_bas_droite(userId, col, i);
+				this.compteur_diagonale_haut_droite_bas_gauche(userId, col, i);
+					
 
 	}
 
@@ -84,9 +80,7 @@ class Grid {
 					}
 					j--;
 				}
-				while ( this.grid[ligne][j] ==userId && j>=0);
-
-				
+				while ( this.grid[ligne][j] ==userId && j>=0);				
 	}
 
 	compteur_haut_bas(userId, colonne , ligne){
@@ -117,6 +111,96 @@ class Grid {
 				while ( this.grid[j+1][colonne] ==userId && j>=0);
 
 	}
+
+	compteur_diagonale_haut_gauche_bas_droite(userId, colonne , ligne){
+		let aligne=0;
+		let j = colonne;
+		let i = ligne;
+		
+		do {		
+			
+			if (this.grid[i][j] == userId)
+				{
+					aligne++;
+					if (aligne==4)
+						this.victoire=true;
+				}
+				j--;
+				i--;
+		}
+		while ( this.grid[i][j] == userId && j>=0  && i >=0);
+
+		j = colonne;
+		i = ligne;
+		aligne=aligne-1; //Le pion joué est déjà compté
+			if(ligne!=this.nbrOfRow-1)
+			{
+
+				do {
+					console.log(i)
+					console.log(j)	
+					if (this.grid[i][j] == userId)
+					{
+							aligne++;
+							if (aligne==4)
+								this.victoire=true;
+					}
+					j++;
+					i++;
+					if(i==this.nbrOfRow){
+						break;
+					}
+				}
+				while ( this.grid[i][j] ==userId && j<this.nbrOfCol && i<this.nbrOfRow);	
+			}	
+		}
+
+
+		compteur_diagonale_haut_droite_bas_gauche(userId, colonne , ligne){
+			let aligne=0;
+			let j = colonne;
+			let i = ligne;
+			
+			do {		
+				
+				if (this.grid[i][j] == userId)
+					{
+						aligne++;
+						if (aligne==4)
+							this.victoire=true;
+					}
+					j++;
+					i--;
+			}
+			while ( this.grid[i][j] == userId && j<this.nbrOfCol  && i >=0);
+	
+			j = colonne;
+			i = ligne;
+			aligne=aligne-1; //Le pion joué est déjà compté
+				if(ligne!=this.nbrOfRow-1)
+				{
+	
+					do {
+						console.log(i)
+						console.log(j)	
+						if (this.grid[i][j] == userId)
+						{
+								aligne++;
+								if (aligne==4)
+									this.victoire=true;
+						}
+						j--;
+						i++;
+						if(i==this.nbrOfRow){
+							break;
+						}
+					}
+					while ( this.grid[i][j] ==userId && j>=0 && i<this.nbrOfRow);	
+				}	
+			}
+		
+
+		
 
 	reset_gride(){
 		for (let i = 0; i < this.nbrOfRow; i++) {
