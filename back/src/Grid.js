@@ -27,7 +27,8 @@ class Grid {
 			return 1;
 		}
 		for (let i = this.nbrOfRow - 1; i >= 0; i--){
-			if (this.grid[i][col] === 0) {
+			if (this.grid[i][col] === 0) 
+			{
 				this.grid[i][col] = userId;
 				this.check_victoire(userId, col, i)
 				return 0;
@@ -55,94 +56,113 @@ class Grid {
 
 	}
 
-	compteur_droite_gauche(userId, colonne , ligne){
-				let aligne=0;
-				let j = colonne;
+	compteur_droite_gauche(userId, col , row){
+				let align=0;
+				let j = col;
 				do {
-					if (this.grid[ligne][j] == userId)
+					if (this.grid[row][j] == userId)
 						{
-							aligne++;
-							if (aligne==4)
+							align++;
+							if (align==4)
 								this.victoire=true;
 						}
 						j++;
-				}
-				while ( this.grid[ligne][j] ==userId && j< this.nbrOfCol);
-
-				j = colonne;
-				aligne=aligne-1; //Le pion joué est déjà compté
-				do {
-					if (this.grid[ligne][j] == userId)
-					{
-							aligne++;
-							if (aligne==4)
-								this.victoire=true;
-					}
-					j--;
-				}
-				while ( this.grid[ligne][j] ==userId && j>=0);				
-	}
-
-	compteur_haut_bas(userId, colonne , ligne){
-				let aligne=0;
-				let j = ligne;
-				do {
-					if (this.grid[j][colonne] == userId)
-						{
-							aligne++;
-							if (aligne==4)
-								this.victoire=true;
+						if(j==this.nbrOfCol){
+							break;
 						}
-						j++;
 				}
-				while ( this.grid[j-1][colonne] ==userId && j< this.nbrOfRow);
+				while ( this.grid[row][j] ==userId && j< this.nbrOfCol);
 
-				j = ligne;
-				aligne=aligne-1; //Le pion joué est déjà compté
+				j = col;
+				align=align-1; //Le pion joué est déjà compté
 				do {
-					if (this.grid[j][colonne] == userId)
+					if (this.grid[row][j] == userId)
 					{
-							aligne++;
-							if (aligne==4)
+							align++;
+							if (align==4)
 								this.victoire=true;
 					}
 					j--;
+					if(j==0){
+						break;
+					}
 				}
-				while ( this.grid[j+1][colonne] ==userId && j>=0);
-
+				while ( this.grid[row][j] ==userId && j>=0);				
 	}
 
-	compteur_diagonale_haut_gauche_bas_droite(userId, colonne , ligne){
-		let aligne=0;
-		let j = colonne;
-		let i = ligne;
-		
-		do {		
+	compteur_haut_bas(userId, col , row){
 			
-			if (this.grid[i][j] == userId)
-				{
-					aligne++;
-					if (aligne==4)
-						this.victoire=true;
+				let align=0;
+				let j = row;
+				do {
+					if (this.grid[j][col] == userId)
+						{
+							align++;
+							if (align==4)
+								this.victoire=true;
+						}
+						j++;
+						if(j==this.nbrOfRow){
+							break;
+						}
 				}
-				j--;
-				i--;
-		}
-		while ( this.grid[i][j] == userId && j>=0  && i >=0);
+				while ( this.grid[j][col] ==userId && j< this.nbrOfRow);
+			
 
-		j = colonne;
-		i = ligne;
-		aligne=aligne-1; //Le pion joué est déjà compté
-			if(ligne!=this.nbrOfRow-1)
+				if(row!=0)
+				{
+				j = row;
+				align=align-1; //Le pion joué est déjà compté
+				do {
+					if (this.grid[j][col] == userId)
+					{
+							align++;
+							if (align==4)
+								this.victoire=true;
+					}
+					j--;
+					if(j==0){
+						break;
+					}
+				}
+				while ( this.grid[j][col] ==userId && j>=0);
+				}
+
+	}
+
+	compteur_diagonale_haut_gauche_bas_droite(userId, col , row){
+		let align=0;
+		let j = col;
+		let i = row;
+				do {		
+					
+					if (this.grid[i][j] == userId)
+						{
+							align++;
+							if (align==4)
+								this.victoire=true;
+						}
+						j--;
+						i--;
+						if(i<=0 || j<=0 ){
+							break;
+						}
+				}
+				while ( this.grid[i][j] == userId && j>=0  && i >=0);
+		
+
+		j = col;
+		i = row;
+		align=align-1; //Le pion joué est déjà compté
+			if(row!=this.nbrOfRow-1)
 			{
 
 				do {
-					console.log(i)
-					console.log(j)	
+						
 					if (this.grid[i][j] == userId)
 					{
-							aligne++;
-							if (aligne==4)
+							align++;
+							if (align==4)
 								this.victoire=true;
 					}
 					j++;
@@ -156,37 +176,38 @@ class Grid {
 		}
 
 
-		compteur_diagonale_haut_droite_bas_gauche(userId, colonne , ligne){
-			let aligne=0;
-			let j = colonne;
-			let i = ligne;
-			
+		compteur_diagonale_haut_droite_bas_gauche(userId, col , row){
+			let align=0;
+			let j = col;
+			let i = row;
 			do {		
 				
 				if (this.grid[i][j] == userId)
 					{
-						aligne++;
-						if (aligne==4)
+						align++;
+						if (align==4)
 							this.victoire=true;
 					}
 					j++;
 					i--;
+					if(i<=0 || j>=this.nbrOfCol ){
+						break;
+					}
 			}
 			while ( this.grid[i][j] == userId && j<this.nbrOfCol  && i >=0);
+		
 	
-			j = colonne;
-			i = ligne;
-			aligne=aligne-1; //Le pion joué est déjà compté
-				if(ligne!=this.nbrOfRow-1)
+			j = col;
+			i = row;
+			align=align-1; //Le pion joué est déjà compté
+				if(row!=this.nbrOfRow-1)
 				{
 	
 					do {
-						console.log(i)
-						console.log(j)	
 						if (this.grid[i][j] == userId)
 						{
-								aligne++;
-								if (aligne==4)
+								align++;
+								if (align==4)
 									this.victoire=true;
 						}
 						j--;
