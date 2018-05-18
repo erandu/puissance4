@@ -20,7 +20,7 @@ const server = require('http').Server(app);
 const io = require('socket.io')(server);
 
 app.use(express.static('../front'));
-server.listen(5000, () => console.log('Puissance 4 listening on port 5000!'));
+server.listen(80, () => console.log('Puissance 4 listening on port 80!'));
 
 
 app.get('/', function (req, res) {

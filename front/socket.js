@@ -1,6 +1,6 @@
 let id=0;
 
-var socket = io.connect('http://localhost:5000', {autoConnect : false});
+var socket = io.connect('http://35.196.59.189:80', {autoConnect : false});
 socket.open();
 
 
