@@ -68,6 +68,8 @@ io.on('connection', function (socket) {
             id_courant=waiting_queue[waiting_queue.length-1].id;
                     if(waiting_queue.length==2 )
                         {   
+                            
+
                             myGrid = new Grid (waiting_queue[0],waiting_queue[1]); 
                             game_started=true;
                             joueur_1=waiting_queue [0].id;
