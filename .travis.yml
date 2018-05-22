@@ -13,7 +13,7 @@ env:
   - secure: ZAjhngTyUAby0wWjB/ZemT4WXyZ3Kn8rNG7Va0fWTUuEGyOdFHI3opZv1T/kgE0oId3HJzDsAFk/NLJTLNdwAZ0OF95lHuyN+H3a7Fg/FQUYw3FZhV9HH6fRICvJ3ZayXC2Ko5H98775JtW4WQBigyd5+8GPIZRUMnsuwbSZ4fHFFYzA4ygTee6VSLAJRNRSuPPU7DBqJtAa7Azmng+o6oY97cEilzrE+Rfv5Wvp5HI8sBDyv2FDh4fKcUnQtv7v+U1FwzbJh99cgnP+YBh1AlhXw6Eu7kUvPsqRIiRXFDfecLf0HmiuoMvrpuXW4h/FRoKf2dL0Du/Jizt9Rw4FBpVoGEo2/I84TLCeZ7vCkmemyObLNUn/taM/2UR6zA4QiMaBmn3fWR/40huL6UOIR5On/LKnlqQw3/cSeM1wnFcsr6e1YS7H9/kiTPa1oj71vWoFZNAdNocouLGxQlFolonrMMX331/vk3nxgIa7ERGvPSi+4RHtXVAUBnm3BfUdl6KO5XCb8o6HNFp1UWls5N3n8Dwg2DrA3BsvFVFQEaL6jvcxI7ZVB1BTvWBuGfptVO4BBmbrdSooxclcpub9NlfJwP1/KIy8+QHgd+2nKDJjtaTy1ggH4DG9XXNvYKcpNLXWzuH6MlhI1Yc6xkYXXskFAmdGTqEQl5afbCvSN0I=
 
 
-after_success:
+script:
   - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
   - docker build -f Dockerfile -t erandu/puissance4:1.0 .
   - docker push erandu/puissance4:1.0
