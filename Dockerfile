@@ -6,7 +6,7 @@ WORKDIR /usr/app
 
 
 COPY . .
-RUN cd back && npm run build
+RUN cd back && npm install && npm run build
  
 
 WORKDIR /usr/app/back
