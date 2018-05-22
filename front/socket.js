@@ -57,7 +57,7 @@ socket.on('grille', function (data) {
   });
 
 
-  socket.on('victoire',function (data) {
+  socket.on('victory',function (data) {
     console.log("victoire")
     if(data==id)
     {
@@ -74,6 +74,18 @@ socket.on('grille', function (data) {
     
 
   });
+
+  socket.on('nul',function (data) {
+    console.log("match nul")
+ 
+      $("#victoire").html(data); 
+      $("#victoire").css("background-color","#e7e7e7");
+      $("#victoire").css("color","white");
+
+    
+
+  });
+
 
 
   

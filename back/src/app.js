@@ -32,15 +32,23 @@ io.on('connection', function (socket) {
 
     socket.on('news', function (data) {    
         
-        if(data.id==joueur_courant && game_started==true && myGrid.victoire==false)
+        if(data.id==joueur_courant && game_started==true && myGrid.victory==0)
             {
                 myGrid.play(data.id,data.pos_x);
-                //myGrid.check_victoire(data.id, data.pos_x);
+                //myGrid.check_victory(data.id, data.pos_x);
                 myGrid.show();
-                if(myGrid.victoire==true)
+                if(myGrid.victory==1)
                 {
-                    console.log("victoire");
-                    io.emit('victoire', joueur_courant);
+                    console.log("victory");
+                    io.emit('victory', joueur_courant);
+                   //myGrid.reset_gride();
+
+                }
+
+                if(myGrid.victory==-1)
+                {
+                    console.log("match nul");
+                    io.emit('nul', "Match nul !");
                    //myGrid.reset_gride();
 
                 }
@@ -62,8 +70,7 @@ io.on('connection', function (socket) {
     socket.on('co', function(){
             if(waiting_queue.length<2)
             {
-            waiting_queue.push(new Player(socket.id));
-            console.log(waiting_queue.length);        
+            waiting_queue.push(new Player(socket.id));        
             socket.emit('Welcome',waiting_queue[waiting_queue.length-1].id)
             id_courant=waiting_queue[waiting_queue.length-1].id;
                     if(waiting_queue.length==2 )
