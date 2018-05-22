@@ -10,7 +10,7 @@ class Grid {
 		this.nbrOfRow = 6;
 		this.player1= _player1;
 		this.player2= _player2;
-		this.victoire=false;
+		this.victory=0;  //-1=nul 1=victory
 
 
 		// Puissance 4
@@ -30,7 +30,7 @@ class Grid {
 			if (this.grid[i][col] === 0) 
 			{
 				this.grid[i][col] = userId;
-				this.check_victoire(userId, col, i)
+				this.check_victory(userId, col, i)
 				return 0;
 			}
 		}
@@ -46,14 +46,29 @@ class Grid {
 		;
 	}
 
-	check_victoire(userId, col, i){
+	check_victory(userId, col, i){
 		
 				this.compteur_droite_gauche(userId, col, i);
 				this.compteur_haut_bas(userId, col, i);
 				this.compteur_diagonale_haut_gauche_bas_droite(userId, col, i);
 				this.compteur_diagonale_haut_droite_bas_gauche(userId, col, i);
+				this.check_nul();
 					
 
+	}
+
+	check_nul(){
+		let case_taken=0
+		for (let i = 0; i < this.nbrOfRow; i++) {
+			for (let j = 0; j < this.nbrOfCol; j++) {
+				if(this.grid[i][j]!=0)
+						case_taken++;	
+			}
+		}
+		if (case_taken==42)
+			{
+				this.victory=-1;
+			}
 	}
 
 	compteur_droite_gauche(userId, col , row){
@@ -64,10 +79,10 @@ class Grid {
 						{
 							align++;
 							if (align==4)
-								this.victoire=true;
+								this.victory=1;
 						}
 						j++;
-						if(j==this.nbrOfCol){
+						if(j>=this.nbrOfCol){
 							break;
 						}
 				}
@@ -80,10 +95,10 @@ class Grid {
 					{
 							align++;
 							if (align==4)
-								this.victoire=true;
+								this.victory=1;
 					}
 					j--;
-					if(j==0){
+					if(j<0){
 						break;
 					}
 				}
@@ -99,10 +114,10 @@ class Grid {
 						{
 							align++;
 							if (align==4)
-								this.victoire=true;
+								this.victory=1;
 						}
 						j++;
-						if(j==this.nbrOfRow){
+						if(j>=this.nbrOfRow){
 							break;
 						}
 				}
@@ -118,10 +133,10 @@ class Grid {
 					{
 							align++;
 							if (align==4)
-								this.victoire=true;
+								this.victory=1;
 					}
 					j--;
-					if(j==0){
+					if(j<0){
 						break;
 					}
 				}
@@ -140,11 +155,11 @@ class Grid {
 						{
 							align++;
 							if (align==4)
-								this.victoire=true;
+								this.victory=1;
 						}
 						j--;
 						i--;
-						if(i<=0 || j<=0 ){
+						if(i<0 || j<0 ){
 							break;
 						}
 				}
@@ -154,8 +169,7 @@ class Grid {
 		j = col;
 		i = row;
 		align=align-1; //Le pion joué est déjà compté
-			if(row!=this.nbrOfRow-1)
-			{
+			
 
 				do {
 						
@@ -163,16 +177,16 @@ class Grid {
 					{
 							align++;
 							if (align==4)
-								this.victoire=true;
+								this.victory=1;
 					}
 					j++;
 					i++;
-					if(i==this.nbrOfRow){
+					if(i>=this.nbrOfRow || j>=this.nbrOfCol){
 						break;
 					}
 				}
 				while ( this.grid[i][j] ==userId && j<this.nbrOfCol && i<this.nbrOfRow);	
-			}	
+			
 		}
 
 
@@ -186,39 +200,39 @@ class Grid {
 					{
 						align++;
 						if (align==4)
-							this.victoire=true;
+							this.victory=1;
 					}
 					j++;
 					i--;
-					if(i<=0 || j>=this.nbrOfCol ){
+					if(i<0 || j>=this.nbrOfCol ){
 						break;
 					}
 			}
 			while ( this.grid[i][j] == userId && j<this.nbrOfCol  && i >=0);
-		
 	
 			j = col;
 			i = row;
 			align=align-1; //Le pion joué est déjà compté
-				if(row!=this.nbrOfRow-1)
-				{
+				
 	
 					do {
 						if (this.grid[i][j] == userId)
 						{
 								align++;
 								if (align==4)
-									this.victoire=true;
+									this.victory=1;
 						}
 						j--;
 						i++;
-						if(i==this.nbrOfRow){
+						if(i>=this.nbrOfRow || j<0){
 							break;
 						}
 					}
 					while ( this.grid[i][j] ==userId && j>=0 && i<this.nbrOfRow);	
+
+			
 				}	
-			}
+				
 		
 
 		
