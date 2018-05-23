@@ -37,7 +37,7 @@ io.on('connection', function (socket) {
             {
                 myGrid.play(data.id,data.pos_x);
                 //myGrid.check_victory(data.id, data.pos_x);
-                myGrid.show();
+                //myGrid.show();
                 if(myGrid.victory==1)
                 {
                     console.log("victory");
