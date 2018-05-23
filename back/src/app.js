@@ -23,8 +23,9 @@ app.use(express.static('../front'));
 server.listen(80, () => console.log('Puissance 4 listening on port 80!'));
 
 
+
 app.get('/', function (req, res) {
-  res.sendfile(__dirname + '/index.html');
+res.sendfile(__dirname + '/index.html');
 });
 
 io.on('connection', function (socket) {
