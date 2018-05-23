@@ -2,7 +2,7 @@ FROM node:9
 
 
 WORKDIR /usr/app
-
+EXPOSE  8080
 
 
 COPY . .
