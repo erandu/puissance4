@@ -16,10 +16,10 @@ script:
 - docker login -u $DOCKER_USER -p $DOCKER_PASS
 - docker build -f Dockerfile -t erandu/puissance4:1.0 .
 - docker push erandu/puissance4:1.0
-deploy:
-  provider: gae
-  project: puissance4-205009
-  keyfile: gce.json
-  verbosity: debug
-  on: master
+#deploy:
+#  provider: gae
+#  project: puissance4-205009
+#  keyfile: gce.json
+#  verbosity: debug
+#  on: master
 
